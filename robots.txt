@@ -1,0 +1,146 @@
+# robots.txt para Country Group GWM
+# https://countrygroupgwm.com/robots.txt
+
+# Permitir acceso a todos los robots de búsqueda legítimos
+User-agent: *
+Allow: /
+
+# Bloquear acceso a directorios administrativos y archivos sensibles
+Disallow: /php/
+Disallow: /.env
+Disallow: /.git/
+Disallow: /logs/
+Disallow: /backup/
+Disallow: /tmp/
+Disallow: /cache/
+
+# Bloquear archivos de configuración
+Disallow: /*.sql$
+Disallow: /*.log$
+Disallow: /*.bak$
+Disallow: /*.old$
+Disallow: /*.tmp$
+
+# Permitir acceso a recursos importantes
+Allow: /assets/
+Allow: /sitemap.xml
+Allow: /favicon.ico
+
+# Configuraciones específicas para bots de búsqueda principales
+
+# Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Yahoo
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+# Yandex
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 2
+
+# Facebook (para Open Graph)
+User-agent: facebookexternalhit
+Allow: /
+
+# Twitter
+User-agent: Twitterbot
+Allow: /
+
+# LinkedIn
+User-agent: LinkedInBot
+Allow: /
+
+# WhatsApp (para preview de enlaces)
+User-agent: WhatsApp
+Allow: /
+
+# Bloquear bots maliciosos conocidos
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MegaIndex
+Disallow: /
+
+# Bots de scraping
+User-agent: HTTrack
+Disallow: /
+
+User-agent: WebZIP
+Disallow: /
+
+User-agent: WebCopier
+Disallow: /
+
+User-agent: WebStripper
+Disallow: /
+
+User-agent: WebSauger
+Disallow: /
+
+User-agent: WebReaper
+Disallow: /
+
+User-agent: WebLeacher
+Disallow: /
+
+User-agent: WebSiteQuester
+Disallow: /
+
+User-agent: WebAuto
+Disallow: /
+
+User-agent: WebBandit
+Disallow: /
+
+User-agent: Teleport
+Disallow: /
+
+User-agent: TeleportPro
+Disallow: /
+
+User-agent: Offline Explorer
+Disallow: /
+
+User-agent: Wget
+Disallow: /
+
+User-agent: grub-client
+Disallow: /
+
+User-agent: k2spider
+Disallow: /
+
+User-agent: NPBot
+Disallow: /
+
+User-agent: WebReaper
+Disallow: /
+
+# Ubicación del sitemap
+Sitemap: https://countrygroupgwm.com/sitemap.xml
+
+# Información adicional
+# Host: countrygroupgwm.com
+# Contact: info@countrygroupgwm.com

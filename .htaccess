@@ -1,0 +1,218 @@
+# .htaccess para Country Group GWM
+# Configuración de Apache para URLs limpias y optimización
+
+# Activar rewrite engine
+RewriteEngine On
+
+# Headers de seguridad
+<IfModule mod_headers.c>
+    # Seguridad XSS
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Prevenir MIME type sniffing
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # Clickjacking protection
+    Header always set X-Frame-Options "SAMEORIGIN"
+    
+    # Referrer policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Content Security Policy (ajustar según necesidades)
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.google-analytics.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; media-src 'self'; object-src 'none'; child-src 'none'; form-action 'self'; base-uri 'self'"
+    
+    # Habilitar HSTS (solo para HTTPS)
+    # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+</IfModule>
+
+# Compresión GZIP
+<IfModule mod_deflate.c>
+    # Comprimir texto, HTML, JavaScript, CSS, XML
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE font/ttf
+    AddOutputFilterByType DEFLATE font/otf
+    AddOutputFilterByType DEFLATE font/woff
+    AddOutputFilterByType DEFLATE font/woff2
+    AddOutputFilterByType DEFLATE image/svg+xml
+    
+    # Excluir archivos ya comprimidos
+    SetEnvIfNoCase Request_URI \
+        \.(?:gif|jpe?g|png|swf|woff|woff2)$ no-gzip dont-vary
+    SetEnvIfNoCase Request_URI \
+        \.(?:exe|t?gz|zip|bz2|sit|rar)$ no-gzip dont-vary
+</IfModule>
+
+# Cache control para recursos estáticos
+<IfModule mod_expires.c>
+    ExpiresActive on
+    
+    # Imágenes (1 año)
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    
+    # Fuentes (1 año)
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+    
+    # CSS y JavaScript (1 mes)
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    
+    # HTML (1 hora)
+    ExpiresByType text/html "access plus 1 hour"
+    
+    # Manifests y otros
+    ExpiresByType application/manifest+json "access plus 1 week"
+    ExpiresByType application/xml "access plus 1 week"
+    ExpiresByType text/xml "access plus 1 week"
+</IfModule>
+
+# Cache headers alternativos si mod_expires no está disponible
+<IfModule mod_headers.c>
+    <FilesMatch "\.(js|css|xml|gz|html)$">
+        Header append Vary: Accept-Encoding
+    </FilesMatch>
+    
+    <FilesMatch "\.(ico|jpg|jpeg|png|gif|webp|svg)$">
+        Header set Cache-Control "public, max-age=31536000"
+    </FilesMatch>
+    
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+    
+    <FilesMatch "\.(woff|woff2|ttf|otf)$">
+        Header set Cache-Control "public, max-age=31536000"
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+</IfModule>
+
+# URLs limpias - Rewrite rules
+# Página principal
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^$ index.php [L]
+
+# Modelos individuales (opcional para futuro)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^modelo/([a-zA-Z0-9-]+)/?$ modelo.php?slug=$1 [L,QSA]
+
+# Páginas específicas
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^modelos/?$ index.php#modelos [L,R=301]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^servicios/?$ index.php#servicios [L,R=301]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^contacto/?$ index.php#contacto [L,R=301]
+
+# Remover .php de las URLs (opcional)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^.]+)$ $1.php [L]
+
+# Redirigir www a no-www (cambiar según preferencia)
+RewriteCond %{HTTP_HOST} ^www\.countrygroupgwm\.com [NC]
+RewriteRule ^(.*)$ https://countrygroupgwm.com/$1 [R=301,L]
+
+# Forzar HTTPS (descomentar cuando esté configurado SSL)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Bloquear acceso directo a archivos sensibles
+<FilesMatch "\.(env|log|sql|md|txt)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Bloquear acceso a directorios del sistema
+RedirectMatch 404 /\.git
+RedirectMatch 404 /\.htaccess
+RedirectMatch 404 /\.htpasswd
+
+# Proteger directorio PHP
+<Files "*.php">
+    <RequireAll>
+        Require all granted
+        Require not env blocked_user_agent
+    </RequireAll>
+</Files>
+
+# Bloquear bots maliciosos (básico)
+<IfModule mod_rewrite.c>
+    RewriteCond %{HTTP_USER_AGENT} (nikto|wikto|scanner|acunetix|morfeus|webcollage) [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
+
+# Prevenir hotlinking de imágenes (opcional)
+<IfModule mod_rewrite.c>
+    RewriteCond %{HTTP_REFERER} !^$
+    RewriteCond %{HTTP_REFERER} !^https?://(www\.)?countrygroupgwm\.com [NC]
+    RewriteCond %{HTTP_REFERER} !^https?://(www\.)?google\. [NC]
+    RewriteCond %{HTTP_REFERER} !^https?://(www\.)?facebook\. [NC]
+    RewriteCond %{REQUEST_URI} \.(jpg|jpeg|png|gif|webp)$ [NC]
+    # RewriteRule \.(jpg|jpeg|png|gif|webp)$ /assets/img/hotlink-blocked.jpg [R,L]
+</IfModule>
+
+# Páginas de error personalizadas
+ErrorDocument 404 /404.php
+ErrorDocument 403 /403.php
+ErrorDocument 500 /500.php
+
+# Configuración de tipos MIME para fuentes
+<IfModule mod_mime.c>
+    AddType application/font-woff .woff
+    AddType application/font-woff2 .woff2
+    AddType application/vnd.ms-fontobject .eot
+    AddType font/truetype .ttf
+    AddType font/opentype .otf
+    AddType image/svg+xml .svg
+</IfModule>
+
+# Optimización adicional
+<IfModule mod_env.c>
+    # Desactivar ETags si no los usas
+    Header unset ETag
+    FileETag None
+</IfModule>
+
+# Límites de subida de archivos (si es necesario)
+php_value upload_max_filesize 10M
+php_value post_max_size 10M
+php_value max_execution_time 300
+php_value max_input_vars 3000
+
+# Configuración de sesión
+php_value session.cookie_httponly 1
+php_value session.cookie_secure 1
+php_value session.use_only_cookies 1
+
+# Ocultar versión de PHP
+<IfModule mod_headers.c>
+    Header unset Server
+    Header unset X-Powered-By
+</IfModule>

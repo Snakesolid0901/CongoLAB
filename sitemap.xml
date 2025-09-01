@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    
+    <!-- Página Principal -->
+    <url>
+        <loc>https://countrygroupgwm.com/</loc>
+        <lastmod>2025-08-31</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- Sección Modelos -->
+    <url>
+        <loc>https://countrygroupgwm.com/#modelos</loc>
+        <lastmod>2025-08-31</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Sección Servicios -->
+    <url>
+        <loc>https://countrygroupgwm.com/#servicios</loc>
+        <lastmod>2025-08-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Sección Contacto -->
+    <url>
+        <loc>https://countrygroupgwm.com/#contacto</loc>
+        <lastmod>2025-08-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Modelos Individuales (para futuras páginas específicas) -->
+    <url>
+        <loc>https://countrygroupgwm.com/modelo/tank-500-hev</loc>
+        <lastmod>2025-08-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://countrygroupgwm.com/modelo/tank-300-hev</loc>
+        <lastmod>2025-08-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://countrygroupgwm.com/modelo/nuevo-h7</loc>
+        <lastmod>2025-08-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://countrygroupgwm.com/modelo/h6-hev</loc>
+        <lastmod>2025-08-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://countrygroupgwm.com/modelo/jolion-pro-hev</loc>
+        <lastmod>2025-08-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://countrygroupgwm.com/modelo/jolion-hev</loc>
+        <lastmod>2025-08-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://countrygroupgwm.com/modelo/poer-passenger</loc>
+        <lastmod>2025-08-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://countrygroupgwm.com/modelo/poer-comercial</loc>
+        <lastmod>2025-08-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://countrygroupgwm.com/modelo/wingle-7</loc>
+        <lastmod>2025-08-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://countrygroupgwm.com/modelo/wingle-5</loc>
+        <lastmod>2025-08-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://countrygroupgwm.com/modelo/ora-03-gt</loc>
+        <lastmod>2025-08-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://countrygroupgwm.com/modelo/ora-03</loc>
+        <lastmod>2025-08-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+</urlset>
